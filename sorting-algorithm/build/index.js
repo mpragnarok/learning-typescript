@@ -1,4 +1,8 @@
 "use strict";
-var sorter = new Sorter([-1, 3, -5, 2]);
+Object.defineProperty(exports, "__esModule", { value: true });
+var Sorter_1 = require("./Sorter");
+var NumbersCollection_1 = require("./NumbersCollection");
+var numbersCollection = new NumbersCollection_1.NumbersCollection([10, 3, 4]);
+var sorter = new Sorter_1.Sorter(numbersCollection);
 sorter.sort();
 console.log(sorter.collection);
