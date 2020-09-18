@@ -1,6 +1,4 @@
-console.log("hi there");
+const sorter = new Sorter([-1, 3, -5, 2]);
 
-const logSomething = () => {
-    console.log("test");
-};
-logSomething();
+sorter.sort();
+console.log(sorter.collection);
