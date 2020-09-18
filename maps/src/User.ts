@@ -1,12 +1,14 @@
 import faker from "faker";
+import { Mappable } from "./CustomMap";
 // never use export default in TS
 // export default "red";
-export class User {
+export class User implements Mappable {
     name: string;
     location: {
         lat: number;
         lng: number;
     };
+    color: string = "red";
 
     constructor() {
         this.name = `${faker.name.firstName()} ${faker.name.lastName()}`;
