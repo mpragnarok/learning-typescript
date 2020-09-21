@@ -1,5 +1,6 @@
 import { Eventing } from "./Eventing";
 import { Sync } from "./Sync";
+import { Attributes } from "./Attributes";
 
 export interface UserProps {
     // ? is optional to have
@@ -12,15 +13,20 @@ const rootUrl = "http://localhost:3000/users";
 export class User {
     public events: Eventing = new Eventing();
     public sync: Sync<UserProps> = new Sync<UserProps>(rootUrl);
-
-    constructor(private data: UserProps) {}
-
-    get(propName: string): string | number {
-        return this.data[propName];
+    public attributes: Attributes<UserProps>;
+    constructor(attrs: UserProps) {
+        this.attributes = new Attributes<UserProps>(attrs);
     }
 
-    set(update: UserProps): void {
-        // copy update data to this.data
-        Object.assign(this.data, update);
+    get on() {
+        // not calling function, it's returning events.on as a reference
+        return this.events.on;
+    }
+
+    get trigger() {
+        return this.events.trigger;
+    }
+    get get() {
+        return this.attributes.get;
     }
 }
