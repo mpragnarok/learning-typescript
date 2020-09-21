@@ -10,4 +10,8 @@ export class Attributes<T> {
         // copy update data to this.data
         Object.assign(this.data, update);
     }
+
+    getAll(): T {
+        return this.data;
+    }
 }
