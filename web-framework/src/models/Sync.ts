@@ -11,6 +11,7 @@ export class Sync<T extends HasId> {
         return axios.get(`${this.rootUrl}/${id}`);
     }
     save(data: T): AxiosPromise {
+        // generate tsconfig file(strict: true) to add undefined type to id:(number | undefined), we'll generate it back afterward
         const { id } = data;
         if (id) {
             // put
