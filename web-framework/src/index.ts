@@ -1,8 +1,9 @@
 import { User } from "./models/User";
 
-const user = new User({});
-user.set({ name: "newname" });
+const user = new User({ id: 1 });
 
-console.log(user.get("name"));
+user.fetch();
 
-console.log(user.get("age"));
+setTimeout(() => {
+    console.log(user);
+}, 4000);
