@@ -1,6 +1,7 @@
 class Boat {
+    @testDecorator
     color: string = "red";
-
+    @testDecorator
     get formattedColor(): string {
         return `This boats color is ${this.color}`;
     }
@@ -10,6 +11,13 @@ class Boat {
         throw new Error();
         console.log("swish");
     }
+}
+
+function testDecorator(target: any, key: string) {
+    // !target is a prototype of Boat class, prototype in JS only store method's definition, we cannot read the property of prototype
+    console.log(target); // Boat{ pilot: ()=>void}
+    console.log(target.color); // undefined
+    console.log(key);
 }
 
 // PropertyDescriptor(ES5 JS): An object that has some configuration options around a property defined on an object
@@ -26,4 +34,4 @@ function logError(errorMessage: string) {
     };
 }
 
-new Boat().pilot();
+// new Boat().pilot();
