@@ -1,15 +1,18 @@
-import { User } from "../models/User";
+import { Model } from "../models/Model";
 
-export abstract class View {
-    constructor(public parent: Element, public model: User) {
+// <T extends Model<K>, K> is Type Generic constraints
+export abstract class View<T extends Model<K>, K> {
+    constructor(public parent: Element, public model: T) {
         this.bindModel();
     }
 
     abstract eventsMap(): { [key: string]: () => void };
-    abstract template: string;
+    abstract template(): string;
     // rebind the events and re-render the html page
     bindModel(): void {
         // when event
+        // ! Property 'on' does not exist on type 'T'.
+        // Fix it with Type Generic constraints
         this.model.on("change", () => {
             this.render();
         });
