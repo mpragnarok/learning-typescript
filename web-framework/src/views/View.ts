@@ -53,12 +53,17 @@ export abstract class View<T extends Model<K>, K> {
         }
     }
 
+    // it's a optional methods for nesting view nesting
+    onRender(): void {}
+
     render(): void {
         this.parent.innerHTML = "";
         const templateElement = document.createElement("template");
         templateElement.innerHTML = this.template();
         this.bindEvents(templateElement.content);
         this.mapRegions(templateElement.content);
+        // event handler for render
+        this.onRender();
         this.parent.append(templateElement.content);
     }
 }
