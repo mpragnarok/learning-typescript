@@ -5,21 +5,24 @@ class Boat {
         return `This boats color is ${this.color}`;
     }
 
-    @logError
+    @logError("Opps boat was sunk in ocean")
     pilot(): void {
         throw new Error();
         console.log("swish");
     }
 }
+
 // PropertyDescriptor(ES5 JS): An object that has some configuration options around a property defined on an object
-function logError(target: any, key: string, desc: PropertyDescriptor): void {
-    const method = desc.value;
-    desc.value = function () {
-        try {
-            method();
-        } catch (e) {
-            console.log("Something wrong");
-        }
+function logError(errorMessage: string) {
+    return function (target: any, key: string, desc: PropertyDescriptor): void {
+        const method = desc.value;
+        desc.value = function () {
+            try {
+                method();
+            } catch (e) {
+                console.log(errorMessage);
+            }
+        };
     };
 }
 
